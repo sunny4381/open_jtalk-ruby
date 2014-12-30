@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["pinarello.marvel@gmail.com"]
   spec.summary       = %q{Open JTalk Ruby}
   spec.description   = %q{Open JTalk is a japanese text synthesis. this gem is ruby bindings.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/sunny4381/open_jtalk-ruby"
   spec.license       = "BSD"
   spec.extensions    = %w[ext/open_jtalk/extconf.rb]
 
@@ -21,6 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.1.0"
-  spec.add_runtime_dependency "lame", "~> 0.0.3"
+  spec.add_development_dependency "rspec", "~> 0"
+  spec.add_runtime_dependency "lame", "~> 0"
 end
