@@ -1,0 +1,17 @@
+dicdir: dic
+model: model/mei/mei_angry.htsvoice
+style:
+  # weight for the spectrum model
+  interpolation0: 1.0
+  # weight for the F0 (fundamental frequency) model
+  interpolation1: 1.0
+  # weight for the duration model
+  duration: 1.0
+  # speaking rate (default: 1.0, 1.0>: slow, 1.0<: fast, 0.1: min, 10.0: max)
+  speed: 1.1
+  # pitch shift in half tone (default: 0.0, min: -24.0, max: 24.0)
+  half_tone: -0.5
+  # gender parameter (default: 0.55, 0.55>: female-like, 0.55<:male-like, min: 0.0, max: 1.0)
+  alpha: 0.55
+  # volume (default:1.0, 1.0<: enhance, min: 0.0, max: 10.0)
+  volume: 1.1

@@ -1,0 +1,12 @@
+diff -Nru a/open_jtalk-1.08/mecab-naist-jdic/char.def b/open_jtalk-1.08/mecab-naist-jdic/char.def
+--- a/open_jtalk-1.08/mecab-naist-jdic/char.def	2013-12-11 14:56:27.000000000 +0900
++++ b/open_jtalk-1.08/mecab-naist-jdic/char.def	2014-12-29 15:01:50.000000000 +0900
+@@ -34,7 +34,7 @@
+ 
+ # SPACE
+ 0x0020 SPACE  # DO NOT REMOVE THIS LINE, 0x0020 is reserved for SPACE
+-0x00D0 SPACE
++0x000D SPACE
+ 0x0009 SPACE
+ 0x000B SPACE
+ 0x000A SPACE
