@@ -1,7 +1,10 @@
 OpenJtalk::Ruby
 ===
 
-This is ruby bindings of [Open JTalk](http://open-jtalk.sourceforge.net).
+This is ruby gem of [Open JTalk](http://open-jtalk.sourceforge.net).
+
+This ruby gem has "Battery Included" philosophy.
+You don't need extra gems or libs except writing a result as mp3.
 
 ## Installation
 
@@ -71,7 +74,7 @@ Other Unix | Meybe YES
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/open_jtalk-ruby/fork )
+1. Fork it ( https://github.com/sunny4381/open_jtalk-ruby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
