@@ -35,23 +35,25 @@ class OpenJtalk
       return new(cfg, dir)
     end
 
-    NORMAL = Config.load_file(File.expand_path(
-      "normal.yml", CONFIG_ROOT))
-    ANGRY = Config.load_file(File.expand_path(
-      "angry.yml", CONFIG_ROOT))
-    BASHFUL = Config.load_file(File.expand_path(
-      "bashful.yml", CONFIG_ROOT))
-    HAPPY = Config.load_file(File.expand_path(
-      "happy.yml", CONFIG_ROOT))
-    SAD = Config.load_file(File.expand_path(
-      "sad.yml", CONFIG_ROOT))
-    FAST = Config.load_file(File.expand_path(
-      "fast.yml", CONFIG_ROOT))
-    SLOW = Config.load_file(File.expand_path(
-      "slow.yml", CONFIG_ROOT))
-    HIGH = Config.load_file(File.expand_path(
-      "high.yml", CONFIG_ROOT))
-    LOW = Config.load_file(File.expand_path(
-      "low.yml", CONFIG_ROOT))
+    module Mei
+      NORMAL = Config.load_file(File.expand_path(
+        "normal.yml", CONFIG_ROOT))
+      ANGRY = Config.load_file(File.expand_path(
+        "angry.yml", CONFIG_ROOT))
+      BASHFUL = Config.load_file(File.expand_path(
+        "bashful.yml", CONFIG_ROOT))
+      HAPPY = Config.load_file(File.expand_path(
+        "happy.yml", CONFIG_ROOT))
+      SAD = Config.load_file(File.expand_path(
+        "sad.yml", CONFIG_ROOT))
+      FAST = Config.load_file(File.expand_path(
+        "fast.yml", CONFIG_ROOT))
+      SLOW = Config.load_file(File.expand_path(
+        "slow.yml", CONFIG_ROOT))
+      HIGH = Config.load_file(File.expand_path(
+        "high.yml", CONFIG_ROOT))
+      LOW = Config.load_file(File.expand_path(
+        "low.yml", CONFIG_ROOT))
+    end
   end
 end

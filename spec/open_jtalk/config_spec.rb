@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe OpenJtalk::Config do
+describe OpenJtalk::Config::Mei do
   describe ".NORMAL" do
-    subject { OpenJtalk::Config::NORMAL }
+    subject { OpenJtalk::Config::Mei::NORMAL }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -16,7 +16,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".ANGRY" do
-    subject { OpenJtalk::Config::ANGRY }
+    subject { OpenJtalk::Config::Mei::ANGRY }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -30,7 +30,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".BASHFUL" do
-    subject { OpenJtalk::Config::BASHFUL }
+    subject { OpenJtalk::Config::Mei::BASHFUL }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -44,7 +44,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".HAPPY" do
-    subject { OpenJtalk::Config::HAPPY }
+    subject { OpenJtalk::Config::Mei::HAPPY }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -58,7 +58,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".SAD" do
-    subject { OpenJtalk::Config::SAD }
+    subject { OpenJtalk::Config::Mei::SAD }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -72,7 +72,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".FAST" do
-    subject { OpenJtalk::Config::FAST }
+    subject { OpenJtalk::Config::Mei::FAST }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -86,7 +86,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".SLOW" do
-    subject { OpenJtalk::Config::SLOW }
+    subject { OpenJtalk::Config::Mei::SLOW }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -100,7 +100,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".HIGH" do
-    subject { OpenJtalk::Config::HIGH }
+    subject { OpenJtalk::Config::Mei::HIGH }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }
@@ -114,7 +114,7 @@ describe OpenJtalk::Config do
   end
 
   describe ".LOW" do
-    subject { OpenJtalk::Config::LOW }
+    subject { OpenJtalk::Config::Mei::LOW }
     it { expect(subject['dicdir']).not_to be_nil }
     it { expect(subject['model']).not_to be_nil }
     it { expect(subject['style']).not_to be_nil }

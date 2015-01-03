@@ -2,15 +2,15 @@ require 'spec_helper'
 require 'lame'
 
 describe OpenJtalk do
-  config = OpenJtalk::Config::NORMAL
-  # config = OpenJtalk::Config::ANGRY
-  # config = OpenJtalk::Config::BASHFUL
-  # config = OpenJtalk::Config::HAPPY
-  # config = OpenJtalk::Config::SAD
-  # config = OpenJtalk::Config::FAST
-  # config = OpenJtalk::Config::SLOW
-  # config = OpenJtalk::Config::HIGH
-  # config = OpenJtalk::Config::LOW
+  config = OpenJtalk::Config::Mei::NORMAL
+  # config = OpenJtalk::Config::Mei::ANGRY
+  # config = OpenJtalk::Config::Mei::BASHFUL
+  # config = OpenJtalk::Config::Mei::HAPPY
+  # config = OpenJtalk::Config::Mei::SAD
+  # config = OpenJtalk::Config::Mei::FAST
+  # config = OpenJtalk::Config::Mei::SLOW
+  # config = OpenJtalk::Config::Mei::HIGH
+  # config = OpenJtalk::Config::Mei::LOW
   openjtalk = OpenJtalk.load(config.to_hash)
 
   describe "#normalize_text" do
