@@ -252,7 +252,8 @@ namespace {
         Check_Type(text, T_STRING);
 
         char *text_ptr = StringValueCStr(text);
-        char *buff = (char *)ruby_xmalloc(strlen(text_ptr) + 1);
+        size_t len = rb_str_strlen(text);
+        char *buff = (char *)ruby_xmalloc(len * 4 + 1);
         text2mecab(buff, text_ptr);
         VALUE ret = rb_enc_str_new_cstr(buff, rb_utf8_encoding());
         ruby_xfree(buff);
