@@ -20,13 +20,13 @@ Or install it yourself as:
     $ git clone git://github.com/sunny4381/open_jtalk-ruby.git
     $ cd open_jtalk-ruby
     $ gem build open_jtalk-ruby.gemspec
-    $ gem install open_jtalk-ruby-0.3.gem
+    $ gem install open_jtalk-ruby-0.4.gem
 
 ## Usage
 
 ```ruby
 require 'open_jtalk'
-text = "こんにちは。"
+text = "こんにちは。".encode("UTF-8")
 
 config = OpenJtalk::Config::Mei::NORMAL
 openjtalk = OpenJtalk.load(config.to_hash)
