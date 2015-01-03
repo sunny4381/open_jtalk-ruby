@@ -28,37 +28,46 @@ Or install it yourself as:
 require 'open_jtalk'
 text = "こんにちは。"
 
-config = OpenJtalk::Config::NORMAL
+config = OpenJtalk::Config::Mei::NORMAL
 openjtalk = OpenJtalk.load(config.to_hash)
 header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
 
-OpenJtalk::WaveFileWriter.save("/tmp/c.wav", header, data)
+OpenJtalk::WaveFileWriter.save("a.wav", header, data)
 ```
 
 ### Configuration
 
 open_jtalk-ruby contains these configurations:
 
-* OpenJtalk::Config::NORMAL: this is default configuration.
-* OpenJtalk::Config::ANGRY
-* OpenJtalk::Config::BASHFUL
-* OpenJtalk::Config::HAPPY
-* OpenJtalk::Config::SAD
-* OpenJtalk::Config::FAST
-* OpenJtalk::Config::SLOW
-* OpenJtalk::Config::HIGH
-* OpenJtalk::Config::LOW
+* OpenJtalk::Config::Mei::NORMAL: this is default configuration.
+* OpenJtalk::Config::Mei::ANGRY
+* OpenJtalk::Config::Mei::BASHFUL
+* OpenJtalk::Config::Mei::HAPPY
+* OpenJtalk::Config::Mei::SAD
+* OpenJtalk::Config::Mei::FAST
+* OpenJtalk::Config::Mei::SLOW
+* OpenJtalk::Config::Mei::HIGH
+* OpenJtalk::Config::Mei::LOW
 
 ### Writer
 
 open_jtalk-ruby contains these writers:
 
 * OpenJtalk::WaveFileWriter: WAV File Writer.
-* OpenJtalk::Mp3FileWriter: MP3 File Writer. this writer requires 'lame'(>= 0.0.3).
+* OpenJtalk::Mp3FileWriter: MP3 File Writer. this writer requires 'lame'(>= 0.0.3) and `libmp3lame.so`.
 
 ### Supported Encoding
 
 open_jtalk-ruby supports only UTF-8.
+
+### Supported Platform
+
+Platforma  | Support
+-----------|---------
+Windows    | NO
+Linux      | YES
+Mac        | YES
+Other Unix | Meybe YES
 
 ## Contributing
 
