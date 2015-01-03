@@ -20,7 +20,7 @@ end
 
 unless File.exists?("#{File.expand_path(HTS_ENGINE_ROOT, $srcdir)}/lib/libHTSEngine.a")
   # we need dummy libHTSEngine.a
-  `ar q #{File.expand_path(HTS_ENGINE_ROOT, $srcdir)}/lib/libHTSEngine.a`
+  `ar q #{File.expand_path(HTS_ENGINE_ROOT, $srcdir)}/lib/libHTSEngine.a /dev/null`
   status = $?.exitstatus
   raise unless status == 0
 end
