@@ -90,6 +90,5 @@ RSpec.configure do |config|
 end
 
 require 'tempfile'
-
-# load all *.rb under lib.
-Dir[File.join(File.dirname(__FILE__), "../lib/**/*.rb")].each { |f| require f }
+require 'securerandom'
+require 'open_jtalk'
