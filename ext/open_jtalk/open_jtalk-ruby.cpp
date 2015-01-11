@@ -40,6 +40,7 @@
 
 namespace {
     struct open_jtalk {
+        bool initialized;
         Mecab m_mecab;
         HTS_Engine m_engine;
         NJD m_njd;
@@ -52,12 +53,31 @@ namespace {
 
     static void open_jtalk_free(struct open_jtalk *ptr)
     {
-        JPCommon_clear(&(ptr->m_jpcommon));
-        NJD_clear(&(ptr->m_njd));
-        HTS_Engine_clear(&(ptr->m_engine));
-        Mecab_clear(&(ptr->m_mecab));
+        if (ptr->initialized) {
+            JPCommon_clear(&(ptr->m_jpcommon));
+            NJD_clear(&(ptr->m_njd));
+            HTS_Engine_clear(&(ptr->m_engine));
+            Mecab_clear(&(ptr->m_mecab));
+            ptr->initialized = false;
+        }
 
         xfree(ptr);
+    }
+
+    static VALUE open_jtalk_close(VALUE self)
+    {
+        struct open_jtalk *ptr;
+        Data_Get_Struct(self, struct open_jtalk, ptr);
+
+        if (ptr->initialized) {
+            JPCommon_clear(&(ptr->m_jpcommon));
+            NJD_clear(&(ptr->m_njd));
+            HTS_Engine_clear(&(ptr->m_engine));
+            Mecab_clear(&(ptr->m_mecab));
+            ptr->initialized = false;
+        }
+
+        return Qnil;
     }
 
     static VALUE open_jtalk_alloc(VALUE klass)
@@ -67,6 +87,7 @@ namespace {
         HTS_Engine_initialize(&(ptr->m_engine));
         NJD_initialize(&(ptr->m_njd));
         JPCommon_initialize(&(ptr->m_jpcommon));
+        ptr->initialized = true;
 
         return Data_Wrap_Struct(klass, open_jtalk_mark, open_jtalk_free, ptr);
     }
@@ -81,6 +102,49 @@ namespace {
             return value;
     }
 
+    BOOL Mecab_load2(Mecab *m, const char *dicdir, const char *userdic){
+        int i;
+        int argc = 5;
+        char **argv;
+
+        if (m == NULL)
+            return FALSE;
+
+        if (m->mecab != NULL)
+            Mecab_clear(m);
+
+        if (dicdir == NULL || strlen(dicdir) == 0)
+            return FALSE;
+
+        argv = (char **) malloc(sizeof(char *) * argc);
+
+        argv[0] = strdup("mecab");
+        argv[1] = strdup("-d");
+        argv[2] = strdup(dicdir);
+        if (userdic) {
+            argv[3] = strdup("-u");
+            argv[4] = strdup(userdic);
+        } else {
+            argc = 3;
+            argv[3] = NULL;
+            argv[4] = NULL;
+        }
+
+        m->mecab = mecab_new(argc, argv);
+
+        for (i = 0; i < argc; i++) {
+            if (argv[i])
+                free(argv[i]);
+        }
+        free(argv);
+
+        if (m->mecab == NULL) {
+            fprintf(stderr,"ERROR: Mecab_load() in mecab.cpp: Cannot open %s.\n", dicdir);
+            return FALSE;
+        }
+        return TRUE;
+    }
+
     static VALUE open_jtalk_load(VALUE klass, VALUE config)
     {
         Check_Type(config, T_HASH);
@@ -92,13 +156,20 @@ namespace {
 
         VALUE dicdir = rb_hash_lookup(config, rb_str_new2("dicdir"));
         char *dicdir_ptr = StringValueCStr(dicdir);
-        if (Mecab_load(&(ptr->m_mecab), dicdir_ptr) != TRUE) {
+        VALUE userdic = rb_hash_lookup(config, rb_str_new2("userdic"));
+        char *userdic_ptr = NULL;
+        if (userdic != Qnil) {
+            userdic_ptr = StringValueCStr(userdic);
+        }
+        if (Mecab_load2(&(ptr->m_mecab), dicdir_ptr, userdic_ptr) != TRUE) {
+            open_jtalk_close(self);
             return Qnil;
         };
 
         VALUE model = rb_hash_lookup(config, rb_str_new2("model"));
         char *model_ptr = StringValueCStr(model);
         if(HTS_Engine_load(&(ptr->m_engine), &model_ptr, 1) != TRUE) {
+            open_jtalk_close(self);
             return Qnil;
         }
 
@@ -179,7 +250,14 @@ namespace {
             }
         }
 
-        return self;
+        if (!rb_block_given_p()) {
+            return self;
+        }
+
+        VALUE ret = rb_yield(self);
+        open_jtalk_close(self);
+
+        return ret;
     }
 
     static VALUE get_param(HTS_Engine *engine)
@@ -251,6 +329,14 @@ namespace {
     {
         Check_Type(text, T_STRING);
 
+        struct open_jtalk *ptr;
+        Data_Get_Struct(self, struct open_jtalk, ptr);
+        if (!ptr->initialized) {
+            VALUE klass = rb_const_get(rb_cObject, rb_intern("StandardError"));
+            rb_raise(klass, "already closed");
+            return Qnil;
+        }
+
         char *text_ptr = StringValueCStr(text);
         size_t len = rb_str_strlen(text);
         char *buff = (char *)ruby_xmalloc(len * 4 + 1);
@@ -267,6 +353,11 @@ namespace {
 
         struct open_jtalk *ptr;
         Data_Get_Struct(self, struct open_jtalk, ptr);
+        if (!ptr->initialized) {
+            VALUE klass = rb_const_get(rb_cObject, rb_intern("StandardError"));
+            rb_raise(klass, "already closed");
+            return Qnil;
+        }
 
         char *text_ptr = StringValueCStr(text);
 
@@ -306,6 +397,14 @@ namespace {
         return ret;
     }
 
+    static VALUE open_jtalk_closed(VALUE self)
+    {
+        struct open_jtalk *ptr;
+        Data_Get_Struct(self, struct open_jtalk, ptr);
+
+        return ptr->initialized ? Qfalse : Qtrue;
+    }
+
     static void open_jtalk_init(void)
     {
         VALUE klass;
@@ -315,6 +414,8 @@ namespace {
         rb_define_alloc_func(klass, open_jtalk_alloc);
         rb_define_method(klass, "synthesis", VALUEFUNC(open_jtalk_synthesis), 1);
         rb_define_method(klass, "normalize_text", VALUEFUNC(open_jtalk_normalize_text), 1);
+        rb_define_method(klass, "close", VALUEFUNC(open_jtalk_close), 0);
+        rb_define_method(klass, "closed?", VALUEFUNC(open_jtalk_closed), 0);
     }
 }
 

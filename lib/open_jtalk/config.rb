@@ -6,7 +6,7 @@ class OpenJtalk
 
     def initialize(config, dir = CONFIG_ROOT)
       # make path absolute
-      [ "dicdir", "model" ].each do |name|
+      [ "dicdir", "userdic", "model" ].each do |name|
         config[name] = File.expand_path(config[name], dir) if config.key?(name)
       end
 

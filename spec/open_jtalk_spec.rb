@@ -111,5 +111,77 @@ describe OpenJtalk do
       end
     end
   end
+
+  describe "#close" do
+    subject {
+      OpenJtalk.load(config.to_hash)
+    }
+
+    it "safely close twice or more" do
+      expect(subject.closed?).to eq false
+      subject.close
+      expect(subject.closed?).to eq true
+      expect { subject.close }.not_to raise_error
+      expect(subject.closed?).to eq true
+      expect { subject.close }.not_to raise_error
+      expect(subject.closed?).to eq true
+      expect { subject.close }.not_to raise_error
+      expect(subject.closed?).to eq true
+    end
+  end
+
+  context "block is given to load" do
+    header = nil
+    data = nil
+    OpenJtalk.load(config.to_hash) do |openjtalk|
+      text = "こんにちは。僕、ミッキーだよ。".encode("UTF-8")
+      header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
+    end
+
+    it "returns non-nil header" do
+      expect(header).not_to be_nil
+    end
+    it "returns header as Hash" do
+      expect(header).to be_a Hash
+    end
+    it "returns header containing valid 'compression_code'" do
+      # 1: PCM
+      expect(header['compression_code']).to eq 1
+    end
+    it "returns header containing valid 'number_of_channels'" do
+      # 1: monoral
+      expect(header['number_of_channels']).to eq 1
+    end
+    it "returns header containing 'sample_rate'" do
+      expect(header['sample_rate']).not_to be_nil
+    end
+    it "returns header containing 'average_bytes_per_second'" do
+      expect(header['average_bytes_per_second']).to eq header['sample_rate'] * header['block_align']
+    end
+    it "returns header containing valid 'block_align'" do
+      # 2: 16-bit
+      expect(header['block_align']).to eq 2
+    end
+    it "returns header containing valid 'significant_bits_per_sample'" do
+      # 16: 16-bit
+      expect(header['significant_bits_per_sample']).to eq 16
+    end
+    it "returns header containing valid 'total_nsamples'" do
+      expect(header['total_nsamples']).to be > 0
+    end
+
+    it "returns non-nil data" do
+      expect(data).not_to be_nil
+    end
+    it "returns data as String" do
+      expect(data).to be_a String
+    end
+    it "returns valid data length" do
+      expect(data.length).to eq header['total_nsamples'] * header['block_align']
+    end
+    it "returns ASCII-8BIT data" do
+      expect(data.encoding.to_s).to eq "ASCII-8BIT"
+    end
+  end
 end
 
