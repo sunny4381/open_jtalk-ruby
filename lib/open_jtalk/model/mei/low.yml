@@ -1,5 +1,5 @@
-dicdir: dic
-model: model/mei/mei_normal.htsvoice
+dicdir: ../../dic
+model: mei_normal.htsvoice
 style:
   # weight for the spectrum model
   interpolation0: 1.0
@@ -10,7 +10,7 @@ style:
   # speaking rate (default: 1.0, 1.0>: slow, 1.0<: fast, 0.1: min, 10.0: max)
   speed: 1.0
   # pitch shift in half tone (default: 0.0, min: -24.0, max: 24.0)
-  half_tone: 0.0
+  half_tone: -2.0
   # gender parameter (default: 0.55, 0.55>: female-like, 0.55<:male-like, min: 0.0, max: 1.0)
   alpha: 0.55
   # volume (default:1.0, 1.0<: enhance, min: 0.0, max: 10.0)
