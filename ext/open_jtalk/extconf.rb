@@ -76,7 +76,7 @@ end
 $objs ||= []
 $objs << "open_jtalk-ruby.#{$OBJEXT}"
 
-SRC_EXT = %w[c m cc mm cxx cpp C]
+SRC_EXT = %w[c m cc mm cxx cpp C]  unless /^1.9/ =~ RUBY_VERSION
 SUBDIRS.each do |d|
   Dir[File.join("#{$srcdir}/#{d}", "*.{#{SRC_EXT.join(%q{,})}}")].each do |c|
     c.gsub!(%r[^#{$srcdir}/], '')
@@ -85,9 +85,11 @@ SUBDIRS.each do |d|
   end
 end
 
-$CXXFLAGS += ' $(cflags)' unless $CXXFLAGS.include?('$(cflags)')
-$warnflags.gsub!('-Wimplicit-function-declaration', '')
-$warnflags.gsub!('-Wdeclaration-after-statement', '')
+unless /^1.9/ =~ RUBY_VERSION
+  $CXXFLAGS += ' $(cflags)' unless $CXXFLAGS.include?('$(cflags)')
+  $warnflags.gsub!('-Wimplicit-function-declaration', '')
+  $warnflags.gsub!('-Wdeclaration-after-statement', '')
+end
 
 create_makefile('open_jtalk/open_jtalk')
 
