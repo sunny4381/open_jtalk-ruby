@@ -32,19 +32,18 @@ require 'open_jtalk'
 text = "こんにちは。".encode("UTF-8")
 
 config = OpenJtalk::Config::Mei::NORMAL
-openjtalk = OpenJtalk.load(config.to_hash)
-header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
+OpenJtalk.load(config.to_hash) do |openjtalk|
+  header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
 
-OpenJtalk::WaveFileWriter.save("a.wav", header, data)
-
-openjtalk.close
+  OpenJtalk::WaveFileWriter.save("a.wav", header, data)
+end
 ```
 
 ### Configuration
 
 open_jtalk-ruby contains these configurations:
 
-* OpenJtalk::Config::Mei::NORMAL: this is default configuration.
+* OpenJtalk::Config::Mei::NORMAL: this is default configuration of female model.
 * OpenJtalk::Config::Mei::ANGRY
 * OpenJtalk::Config::Mei::BASHFUL
 * OpenJtalk::Config::Mei::HAPPY
@@ -53,6 +52,11 @@ open_jtalk-ruby contains these configurations:
 * OpenJtalk::Config::Mei::SLOW
 * OpenJtalk::Config::Mei::HIGH
 * OpenJtalk::Config::Mei::LOW
+* OpenJtalk::Config::Nitech::NORMAL: this is default configuration of male model.
+* OpenJtalk::Config::Nitech::FAST
+* OpenJtalk::Config::Nitech::SLOW
+* OpenJtalk::Config::Nitech::HIGH
+* OpenJtalk::Config::Nitech::LOW
 
 ### Writer
 
