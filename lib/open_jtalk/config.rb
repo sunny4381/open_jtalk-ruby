@@ -60,13 +60,13 @@ class OpenJtalk
       NORMAL = Config.load_file(File.expand_path(
         File.join("model", "nitech", "normal.yml"), CONFIG_ROOT))
       FAST = Config.load_file(File.expand_path(
-        File.join("model", "mei", "fast.yml"), CONFIG_ROOT))
+        File.join("model", "nitech", "fast.yml"), CONFIG_ROOT))
       SLOW = Config.load_file(File.expand_path(
-        File.join("model", "mei", "slow.yml"), CONFIG_ROOT))
+        File.join("model", "nitech", "slow.yml"), CONFIG_ROOT))
       HIGH = Config.load_file(File.expand_path(
-        File.join("model", "mei", "high.yml"), CONFIG_ROOT))
+        File.join("model", "nitech", "high.yml"), CONFIG_ROOT))
       LOW = Config.load_file(File.expand_path(
-        File.join("model", "mei", "low.yml"), CONFIG_ROOT))
+        File.join("model", "nitech", "low.yml"), CONFIG_ROOT))
     end
   end
 end
