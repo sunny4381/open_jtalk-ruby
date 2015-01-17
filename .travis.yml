@@ -12,6 +12,8 @@ before_install:
 install:
   - bundle install --without production --path vendor/bundle --deployment
 before_script:
-  - bundle exec rake compile
+  - pwd
+  - ls
+  - cd open_jtalk-ruby && bundle exec rake compile
 script:
   - bundle exec rake spec
