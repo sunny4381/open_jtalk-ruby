@@ -119,7 +119,6 @@ config/secrets.yml
 bower.json
 
 # other files
-/Gemfile.lock
 *.bundle
 *.so
 *.o
