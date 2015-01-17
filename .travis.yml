@@ -14,8 +14,7 @@ before_install:
 install:
   - bundle install --without production --path vendor/bundle --deployment
 before_script:
-  - pwd
-  - ls
+  - gcc --version
   - bundle exec rake compile
 script:
   - bundle exec rake spec
