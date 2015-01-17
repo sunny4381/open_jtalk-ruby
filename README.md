@@ -6,6 +6,10 @@ This is ruby gem of [Open JTalk](http://open-jtalk.sourceforge.net).
 This ruby gem has "Battery Included" philosophy.
 You don't need extra gems or libs except writing a result as mp3.
 
+[![Build Status](https://travis-ci.org/sunny4381/open_jtalk-ruby.svg?branch=master)](https://travis-ci.org/sunny4381/open_jtalk-ruby)
+[![Coverage Status](https://coveralls.io/repos/sunny4381/open_jtalk-ruby/badge.svg?branch=master)](https://coveralls.io/r/sunny4381/open_jtalk-ruby?branch=master)
+[![Code Climate](https://codeclimate.com/github/sunny4381/open_jtalk-ruby/badges/gpa.svg)](https://codeclimate.com/github/sunny4381/open_jtalk-ruby)
+
 ## Installation
 
 Add this line to your application's Gemfile:
