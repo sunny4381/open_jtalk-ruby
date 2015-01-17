@@ -8,12 +8,14 @@ cache:
   - vendor/bundle
 before_install:
   - sudo apt-get install -y libmp3lame0
+  - pushd .
   - cd /usr/lib/x86_64-linux-gnu && sudo ln -s libmp3lame.so.0.0.0 libmp3lame.so
+  - popd
 install:
   - bundle install --without production --path vendor/bundle --deployment
 before_script:
   - pwd
   - ls
-  - cd open_jtalk-ruby && bundle exec rake compile
+  - bundle exec rake compile
 script:
   - bundle exec rake spec
