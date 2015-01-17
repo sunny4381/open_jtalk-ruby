@@ -6,6 +6,6 @@ gem "rake-compiler"
 gem "lame"
 
 group :test do
-  gem "rspec"
+  gem 'rspec', :require => false
   gem 'coveralls', :require => false
 end
