@@ -14,6 +14,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".ANGRY" do
@@ -28,6 +29,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".BASHFUL" do
@@ -42,6 +44,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".HAPPY" do
@@ -56,6 +59,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".SAD" do
@@ -70,6 +74,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".FAST" do
@@ -84,6 +89,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".SLOW" do
@@ -98,6 +104,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".HIGH" do
@@ -112,6 +119,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".LOW" do
@@ -126,6 +134,16 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
+    end
+
+    describe "custom configuration: very fast" do
+      subject do
+        OpenJtalk::Config::Mei::FAST.configure do |conf|
+          conf['style']['speed'] = conf['style']['speed'] * 2
+        end
+      end
+      it { expect(subject['style']['speed']).to eq OpenJtalk::Config::Mei::FAST['style']['speed'] }
     end
   end
 
@@ -142,6 +160,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".FAST" do
@@ -156,6 +175,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".SLOW" do
@@ -170,6 +190,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".HIGH" do
@@ -184,6 +205,7 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
     end
 
     describe ".LOW" do
@@ -198,6 +220,16 @@ describe OpenJtalk::Config::Mei do
       it { expect(subject['style']['half_tone']).not_to be_nil }
       it { expect(subject['style']['alpha']).not_to be_nil }
       it { expect(subject['style']['volume']).not_to be_nil }
+      it { expect(subject.to_h).to be_kind_of(Hash) }
+    end
+
+    describe "custom configuration: very fast" do
+      subject do
+        OpenJtalk::Config::Nitech::FAST.configure do |conf|
+          conf['style']['speed'] = conf['style']['speed'] * 2
+        end
+      end
+      it { expect(subject['style']['speed']).to eq OpenJtalk::Config::Nitech::FAST['style']['speed'] }
     end
   end
 end

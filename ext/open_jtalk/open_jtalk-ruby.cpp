@@ -147,6 +147,9 @@ namespace {
 
     static VALUE open_jtalk_load(VALUE klass, VALUE config)
     {
+        if (rb_respond_to(config, rb_intern("to_h"))) {
+            config = rb_funcall(config, rb_intern("to_h"), 0);
+        }
         Check_Type(config, T_HASH);
 
         VALUE self = rb_obj_alloc(klass);

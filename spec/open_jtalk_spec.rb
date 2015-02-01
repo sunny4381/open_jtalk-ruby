@@ -12,7 +12,7 @@ describe OpenJtalk do
   # config = OpenJtalk::Config::Mei::SLOW
   # config = OpenJtalk::Config::Mei::HIGH
   # config = OpenJtalk::Config::Mei::LOW
-  openjtalk = OpenJtalk.load(config.to_hash)
+  openjtalk = OpenJtalk.load(config)
 
   describe "#normalize_text" do
     context "when 'abcd' is given" do
@@ -115,7 +115,7 @@ describe OpenJtalk do
 
   describe "#close" do
     subject {
-      OpenJtalk.load(config.to_hash)
+      OpenJtalk.load(config)
     }
 
     it "safely close twice or more" do
@@ -134,7 +134,7 @@ describe OpenJtalk do
   context "block is given to load" do
     header = nil
     data = nil
-    OpenJtalk.load(config.to_hash) do |openjtalk|
+    OpenJtalk.load(config) do |openjtalk|
       text = "こんにちは。僕、ミッキーだよ。".encode("UTF-8")
       header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
     end

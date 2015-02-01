@@ -18,11 +18,13 @@ class OpenJtalk
       return @config[key]
     end
 
-    def to_hash
+    def to_h
      return @config.dup
     end
 
-    def copy
+    alias_method :to_hash, :to_h
+
+    def configure
       config_copy = @config.dup
       yield config_copy if block_given?
       return self.class.new(config_copy, @dir)
