@@ -81,7 +81,7 @@ SUBDIRS.each do |d|
   Dir[File.join("#{$srcdir}/#{d}", "*.{#{SRC_EXT.join(%q{,})}}")].each do |c|
     c.gsub!(%r[^#{$srcdir}/], '')
     c.gsub!(%r[(#{SRC_EXT.join(%q{|})})$], $OBJEXT)
-    $objs << c
+    $objs << c unless $objs.include?(c)
   end
 end
 
