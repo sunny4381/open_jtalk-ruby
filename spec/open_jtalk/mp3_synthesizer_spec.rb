@@ -11,6 +11,14 @@ describe OpenJtalk::Mp3Synthesizer do
       end
     end
 
+    context "when '検索' is given" do
+      it "creates mp3 file" do
+        file = ::Tempfile.new(rand(0x10000000).to_s(36))
+        OpenJtalk::Mp3Synthesizer.synthesize(file, OpenJtalk::Config::Mei::NORMAL, "検索")
+        expect(file.length).to be > 2_000
+      end
+    end
+
     context "when '、' is given" do
       it "creates empty file" do
         file = ::Tempfile.new(rand(0x10000000).to_s(36))

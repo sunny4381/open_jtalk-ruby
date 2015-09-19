@@ -26,8 +26,8 @@ class OpenJtalk::Mp3StreamingSynthesizer
           if slice.length == frame_size
             @encoder.encode_short(slice, slice) do |mp3_data|
               yield mp3_data
-              []
             end
+            []
           else
             slice
           end

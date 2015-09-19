@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    open_jtalk-ruby (0.7.0)
+    open_jtalk-ruby (0.7.1)
       lame (~> 0)
 
 GEM
