@@ -111,6 +111,30 @@ describe OpenJtalk do
         end
       end
     end
+
+    context "when '、' is given" do
+      text = "、".encode("UTF-8")
+      header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
+
+      it "returns nil header" do
+        expect(header).to be_nil
+      end
+      it "returns nil data" do
+        expect(data).to be_nil
+      end
+    end
+
+    context "when '\\n\\n' is given" do
+      text = "\n\n".encode("UTF-8")
+      header, data = openjtalk.synthesis(openjtalk.normalize_text(text))
+
+      it "returns nil header" do
+        expect(header).to be_nil
+      end
+      it "returns nil data" do
+        expect(data).to be_nil
+      end
+    end
   end
 
   describe "#close" do
@@ -185,4 +209,3 @@ describe OpenJtalk do
     end
   end
 end
-

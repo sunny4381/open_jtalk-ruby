@@ -16,6 +16,7 @@ class OpenJtalk::Mp3StreamingSynthesizer
     pending_slice = OpenJtalk.load(@config) do |openjtalk|
       e.reduce([]) do |pending, line|
         header, pcm_data = openjtalk.synthesis(openjtalk.normalize_text(line))
+        next pending if header.nil? || pcm_data.nil?
 
         @encoder = create_encoder(header) unless @encoder
         frame_size = @encoder.framesize
