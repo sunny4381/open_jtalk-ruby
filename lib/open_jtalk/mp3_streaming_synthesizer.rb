@@ -45,6 +45,16 @@ class OpenJtalk::Mp3StreamingSynthesizer
       @encoder.flush do |flush_frame|
         yield flush_frame
       end
+    else
+      # yeild empty mp3
+      @encoder = create_encoder('number_of_channels' => 1, 'sample_rate' => 48000)
+      @encoder.encode_short([], []) do |mp3_data|
+        yield mp3_data
+      end
+
+      @encoder.flush do |flush_frame|
+        yield flush_frame
+      end
     end
 
     # dispose

@@ -23,7 +23,7 @@ describe OpenJtalk::Mp3Synthesizer do
       it "creates empty file" do
         file = ::Tempfile.new(rand(0x10000000).to_s(36))
         OpenJtalk::Mp3Synthesizer.synthesize(file, OpenJtalk::Config::Mei::NORMAL, "、")
-        expect(file.length).to eq 0
+        expect(file.length).to eq 768
       end
     end
 
@@ -31,7 +31,7 @@ describe OpenJtalk::Mp3Synthesizer do
       it "creates empty file" do
         file = ::Tempfile.new(rand(0x10000000).to_s(36))
         OpenJtalk::Mp3Synthesizer.synthesize(file, OpenJtalk::Config::Mei::NORMAL, "\n\n")
-        expect(file.length).to eq 0
+        expect(file.length).to eq 768
       end
     end
   end
