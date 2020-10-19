@@ -20,7 +20,7 @@ GEM
       ffi
     mime-types (2.4.3)
     multi_json (1.10.1)
-    rake (10.4.2)
+    rake (13.0.1)
     rake-compiler (0.9.5)
       rake
     rest-client (1.6.7)
@@ -55,6 +55,6 @@ DEPENDENCIES
   coveralls
   lame
   open_jtalk-ruby!
-  rake (~> 10.0)
+  rake (~> 13.0)
   rake-compiler
   rspec
